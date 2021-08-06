@@ -1,0 +1,190 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="style2.css">
+</head>
+<body>
+    <!--<button style="float:right" class="login">login</button> -->
+    <button style="float:right" class="login" onclick="myFunction_hide()">Click Me</button>
+
+  <div id="myDIV">
+    <div class="login-area">
+      <div class="row2" id="openbar">
+          <div >
+              <div class="login-name">Login</div>   
+          </div>
+          <div >
+              <div class="input-box"> &nbsp; <input type="text" name="fname" id="fname" placeholder="Name">
+                  <br>
+          </div>
+          <p id="demo"></p>
+         </div>
+          
+          <div >
+              <div class="input-box">   
+                <input type="password" name="lname" id="lname"  placeholder="Password" class="pass" ><br>
+                <input class="check" type="checkbox" onclick="showpass()">Show Password
+                <button id="Reset" onclick="document.getElementById('fname').value = ''; document.getElementById('lname').value = '';">Reset</button>
+                  
+          </div>
+          <p id="demo2"></p>
+        </div>
+          <div > 
+              <button id="myButton" class="primary-button button " onclick="fun()" name="submit" >Submit</button>
+          </div>
+      </div>
+  
+  </div>
+  </div>      
+
+<!-- herer-->
+    <script>
+
+
+        // on 
+
+
+        const pass = document.querySelector('.pass');
+        function showpass(){
+           if(pass.type==="password"){
+            pass.type="text";
+           }
+           else{
+            pass.type="password";
+           }
+        }
+
+        const photoEl = document.querySelector('.login');
+        const openbar1 = document.getElementById('myDIV');
+
+        photoEl.addEventListener('click',function(){
+
+        if(openbar1.style.display ==="none")
+        {  
+              openbar1.style.display="block";
+        }
+        else
+        {
+              openbar1.style.display="none";
+         }
+         return false;
+
+        });
+
+        /*function myFunction_hide() {
+            var x = document.getElementById("myDiv");
+            if (x.style.display === "none") 
+            {
+              x.style.display = "block";
+            } else 
+            {
+              x.style.display = "none";
+            }
+        }*/
+
+
+        // validation
+        function fun(){
+              //  value set tpo local storage
+              const namef=document.getElementById("fname").value;
+              console.log(namef);
+              localStorage.setItem("NAME",namef);
+
+
+            var val = document.getElementById("fname").value;
+        
+           
+            // password velidation
+
+            var val2 = document.getElementById("lname").value;
+            
+            if(val2 === "")
+             {
+               document.getElementById("demo2").innerHTML="Fill the password";
+               return false;
+             }
+            if(val2.length < 8)
+             {
+               document.getElementById("demo2").innerHTML="password must conatain atleast 8 char";
+               return false;
+             }
+              let special=false;
+              let small=false;
+              let capital=false;
+              let numb=false;
+
+              let z=[...val2];
+              for(i=0;i<z.length;i++)
+              {
+                  if(z[i]>='a'&&z[i]<='z')
+                  {
+                      small=true;
+                  }
+                  else if(z[i]>='A'&&z[i]<='Z')
+                  {
+                      capital=true;
+                  }
+                  else if(z[i]>='0'&&z[i]<='9')
+                  {
+                      numb=true;
+                  }
+                  else
+                  {
+                      special=true;
+                  }
+                 
+              }
+              if(val.indexOf("@")===-1)
+              {
+               document.getElementById("demo").innerHTML="Its not valid input";
+              }
+             else
+              {
+                document.getElementById("demo").innerHTML="Its valid input";
+                if(special&&small&&capital&&numb)
+                {
+                document.getElementById("demo2").innerHTML="Please click submit to proceed";
+                document. getElementById("myButton"). onclick = function () {
+                location. href = "./form1_page.html";
+                };
+                return false;
+              }
+              else
+              {
+                  if(small===false)
+                  {
+                    document.getElementById("demo2").innerHTML="Please enter a small letter";
+                    return false;
+                  }
+
+                  if(capital===false)
+                  {
+                    document.getElementById("demo2").innerHTML="Please enter a Capital letter";
+                    return false;
+                  }
+
+                  if(numb===false)
+                  {
+                    document.getElementById("demo2").innerHTML="Please enter a number letter";
+                    return false;
+                  }
+
+                  if(special===false)
+                  {
+                    document.getElementById("demo2").innerHTML="Please enter a special character";
+                    return false;
+                  }
+
+              }
+           }
+              
+
+
+        }
+    </script>
+</body>
+</html>
